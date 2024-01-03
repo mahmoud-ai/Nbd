@@ -93,7 +93,9 @@ physical_devices = tf.config.list_physical_devices('GPU')
 if physical_devices:
     tf.config.experimental.set_memory_growth(physical_devices[0], True)
     print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
-
+else:
+    print("CPU  ...!!!\n")
+    
 X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=0)
 
 print("Features shape : ",X_train.shape)
