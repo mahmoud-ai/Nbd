@@ -93,8 +93,6 @@ X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=
 # Reshape your input data to fit the model
 X_train = X_train.todense().reshape((X_train.shape[0], X_train.shape[1], 1))
 X_test = X_test.todense().reshape((X_test.shape[0], X_test.shape[1], 1))
-X_train = X_train.reshape((32000, 52350, 1))
-
 
 #current model
 
@@ -124,7 +122,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 history = model.fit(X_train, y_train, epochs=1000, batch_size=32, validation_data=(X_test, y_test))
 
 # Evaluate the model
-loss, accuracy = model.evaluate(X_test, y_test)
+#loss, accuracy = model.evaluate(X_test, y_test)
 
 # Make predictions
 #predictions = model.predict(y_test)
