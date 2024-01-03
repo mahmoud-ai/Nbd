@@ -132,7 +132,7 @@ print("start model ")
 # Train the model
 #model.fit(X_train, y_train, epochs=1, batch_size=32, validation_data=(X_test, y_test))
 # Train the model
-history = model.fit(X_train, y_train, epochs=1000, batch_size=32, validation_data=(X_test, y_test))
+history = model.fit(X_train, y_train, epochs=100, batch_size=256, validation_data=(X_test, y_test))
 
 # Evaluate the model
 #loss, accuracy = model.evaluate(X_test, y_test)
