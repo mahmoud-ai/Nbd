@@ -4,7 +4,7 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import nltk
 nltk.download('stopwords')
-
+from keras.layers import Embedding, Conv1D, MaxPooling1D, LSTM, Dense, Dropout
 from nltk.corpus import stopwords
 import nltk
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -99,20 +99,27 @@ X_train = X_train.reshape((32000, 52350, 1))
 #current model
 
 # Define the model architecture
+embedding_dim=100
+vocab_size=52350
+
 model = Sequential()
-model.add(Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=(X_train.shape[1], 1)))
-#model.add(Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=(X_train.shape[1], 1), min_ndim=2))
-#model.add(Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=(X_train.shape[1],)))
-#model.add(Conv1D(filters=32, kernel_size=3, activation='relu', input_shape=(X_train.shape[1], 1)))
+
+model.add(Embedding(input_dim=vocab_size,  # Replace vocab_size with your actual vocabulary size
+                    output_dim=embedding_dim,  # Choose an appropriate embedding dimension
+                    input_length=X_train.shape[1]))
+model.add(Dropout(0.5))  # Apply dropout after the embedding layer
+
+model.add(Conv1D(filters=32, kernel_size=3, activation='relu'))
 model.add(MaxPooling1D(pool_size=2))
 model.add(LSTM(units=64))
+model.add(Dropout(0.5))  # Apply dropout before the final dense layer
 model.add(Dense(units=1, activation='sigmoid'))
 
 # Compile the model
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # Train the model
-#model.fit(X_train, y_train, epochs=10, batch_size=32, validation_data=(X_test, y_test))
+#model.fit(X_train, y_train, epochs=1, batch_size=32, validation_data=(X_test, y_test))
 # Train the model
 history = model.fit(X_train, y_train, epochs=1000, batch_size=32, validation_data=(X_test, y_test))
 
