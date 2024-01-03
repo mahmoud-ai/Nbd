@@ -22,7 +22,7 @@ from pyarabic.araby import strip_tashkeel, strip_tatweel, normalize_ligature, no
 
 stop_words = stopwords.words("arabic")
 # Load the dataset
-data = pd.read_excel('data\\egy_tweet.xlsx')
+data = pd.read_excel('egy_tweet.xlsx')
 #from sklearn.preprocessing import LabelEncoder
 
 # Separate positive and negative reviews
