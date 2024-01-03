@@ -18,16 +18,17 @@ from keras.models import Sequential
 from keras.layers import Embedding, Conv1D, MaxPooling1D, LSTM, Dense
 import pandas as pd
 from pyarabic.araby import strip_tashkeel, strip_tatweel, normalize_ligature, normalize_hamza, normalize_alef, normalize_teh
-
+import tensorflow as tf
 
 stop_words = stopwords.words("arabic")
 # Load the dataset
 data = pd.read_excel('egy_tweet.xlsx')
+print("data is read")
 #from sklearn.preprocessing import LabelEncoder
 
 # Separate positive and negative reviews
-positive_data = data[data['label']=="positive"]  # Assuming 4 and 5 are positive ratings
-negative_data = data[data['label']=="negative"]  # Assuming 0, 1, and 3 are negative ratings
+#positive_data = data[data['label']=="positive"]  # Assuming 4 and 5 are positive ratings
+#negative_data = data[data['label']=="negative"]  # Assuming 0, 1, and 3 are negative ratings
 # Preprocess the data - Assuming the 'text' column contains the tweet text
 texts = data['review'].values
 labels = data['label'].values  # Assuming there's a 'label' column indicating sentiment or some target
@@ -86,9 +87,19 @@ labels=data['label']
 vectorized_data = preprocess_and_vectorize(texts)
 features=vectorized_data
 
+#for Gpu
 
+physical_devices = tf.config.list_physical_devices('GPU')
+if physical_devices:
+    tf.config.experimental.set_memory_growth(physical_devices[0], True)
+    print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=0)
+
+print("Features shape : ",X_train.shape)
+print("Tst Features shape : ",X_test.shape)
+print("Labels shape : ",y_train.shape)
+print("Tst labels shape : ",y_test.shape)
 
 # Reshape your input data to fit the model
 X_train = X_train.todense().reshape((X_train.shape[0], X_train.shape[1], 1))
@@ -115,7 +126,7 @@ model.add(Dense(units=1, activation='sigmoid'))
 
 # Compile the model
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
-
+print("start model ")
 # Train the model
 #model.fit(X_train, y_train, epochs=1, batch_size=32, validation_data=(X_test, y_test))
 # Train the model
