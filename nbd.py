@@ -65,8 +65,8 @@ def preprocess_and_vectorize(X):
     for text in normalized_texts:
         processed = [token for token in text if token not in arabic_stopwords]
         processed_texts.append(processed)
-        print(processed)
-        print("******\n")
+        #print(processed)
+        #print("******\n")
     
     # Vectorization using TF-IDF
     vectorizer = TfidfVectorizer(tokenizer=lambda x: x, lowercase=False)
