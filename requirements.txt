@@ -1,0 +1,7 @@
+pandas 
+openpyxl 
+tensorflow
+pyarabic
+numpy
+nltk
+sklearn==1.3.2
