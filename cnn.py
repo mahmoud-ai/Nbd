@@ -25,7 +25,7 @@ from nltk.stem import ISRIStemmer
 
 stop_words = stopwords.words("arabic")
 # Load the dataset
-data = pd.read_excel('egy_tweet.xlsx')
+data = pd.read_excel('Merge.xlsx')
 print("data is read")
 #from sklearn.preprocessing import LabelEncoder
 
