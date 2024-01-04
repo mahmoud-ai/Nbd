@@ -68,6 +68,7 @@ def preprocess_and_vectorize(X):
     processed_texts = []
     for text in normalized_texts:
         processed = [token for token in text if token not in arabic_stopwords]
+        processed=' '.join(processed)
         processed_texts.append(processed)
         #print(processed)
         #print("******\n")
@@ -80,8 +81,8 @@ def preprocess_and_vectorize(X):
         #print(lemmatized)
         #print("lem**ed*****")
         lemmatized_texts.append(lemmatized)
-    print("without lemma :",processed_texts[1520])
-    print("with lemma :",lemmatized_texts[1520])
+    print("without lemma :",processed_texts[0])
+    print("with lemma :",lemmatized_texts[0])
     # Vectorization using TF-IDF
     vectorizer = TfidfVectorizer(tokenizer=lambda x: x, lowercase=False)
     vectorized_data = vectorizer.fit_transform(processed_texts)
