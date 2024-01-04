@@ -75,14 +75,14 @@ def preprocess_and_vectorize(X):
      # Lemmatization with ISRIStemmer
     stemmer = ISRIStemmer()
     lemmatized_texts = []
-    for tokens in processed_texts:
-        lemmatized = [stemmer.stem(token) for token in tokens]
-        lemmatized=' '.join(lemmatized)
-        #print(lemmatized)
-        #print("lem**ed*****")
-        lemmatized_texts.append(lemmatized)
+    #for tokens in processed_texts:
+    #    lemmatized = [stemmer.stem(token) for token in tokens]
+    #    lemmatized=' '.join(lemmatized)
+    #    print(lemmatized)
+    #    print("lem**ed*****")
+    #    lemmatized_texts.append(lemmatized)
     print("without lemma :",processed_texts[0])
-    print("with lemma :",lemmatized_texts[0])
+    #print("with lemma :",lemmatized_texts[0])
     # Vectorization using TF-IDF
     vectorizer = TfidfVectorizer(tokenizer=lambda x: x, lowercase=False)
     vectorized_data = vectorizer.fit_transform(processed_texts)
