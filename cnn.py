@@ -22,6 +22,17 @@ import tensorflow as tf
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import ISRIStemmer
+from farasa.stemmer import FarasaStemmer
+
+def stem_arabic_words(word_list):
+    stemmer = FarasaStemmer(interactive=False)  # Initialize FarasaStemmer
+    
+    stemmed_words = []
+    for word in word_list:
+        stemmed_word = stemmer.stem(word)  # Stem each word
+        stemmed_words.append(stemmed_word)
+    
+    return stemmed_words
 
 stop_words = stopwords.words("arabic")
 # Load the dataset
@@ -50,9 +61,6 @@ def preprocess_and_vectorize(X):
     for text in X:
         tokens = [word for word in text.split() if is_arabicrange(word)]
         tokenized_texts.append(tokens)
-    
-    # Lemmatization with PyArabic (PyArabic does not have built-in lemmatization)
-    # As PyArabic does not have a built-in lemmatizer, you can skip this step or use other libraries
    
     # Normalize the text using PyArabic
     normalized_texts = []
@@ -68,24 +76,25 @@ def preprocess_and_vectorize(X):
     processed_texts = []
     for text in normalized_texts:
         processed = [token for token in text if token not in arabic_stopwords]
-        processed=' '.join(processed)
+        #processed=' '.join(processed)
         processed_texts.append(processed)
         #print(processed)
         #print("******\n")
-     # Lemmatization with ISRIStemmer
-    stemmer = ISRIStemmer()
-    lemmatized_texts = []
-    #for tokens in processed_texts:
-    #    lemmatized = [stemmer.stem(token) for token in tokens]
-    #    lemmatized=' '.join(lemmatized)
+
+    #Lemmatization
+    lemmatized_texts=[]
+    for tokens in processed_texts:
+        
+        lemmatized = stem_arabic_words(tokens)
+        lemmatized=' '.join(lemmatized)
     #    print(lemmatized)
     #    print("lem**ed*****")
-    #    lemmatized_texts.append(lemmatized)
+        lemmatized_texts.append(lemmatized)
     print("without lemma :",processed_texts[0])
-    #print("with lemma :",lemmatized_texts[0])
+    print("with lemma :",lemmatized_texts[0])
     # Vectorization using TF-IDF
     vectorizer = TfidfVectorizer(tokenizer=lambda x: x, lowercase=False)
-    vectorized_data = vectorizer.fit_transform(processed_texts)
+    vectorized_data = vectorizer.fit_transform(lemmatized_texts)
     
     return vectorized_data
 
