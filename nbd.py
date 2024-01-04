@@ -111,7 +111,7 @@ X_test = X_test.todense().reshape((X_test.shape[0], X_test.shape[1], 1))
 
 # Define the model architecture
 embedding_dim=100
-vocab_size=52350
+vocab_size=10000 #52350
 
 model = Sequential()
 
