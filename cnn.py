@@ -80,6 +80,8 @@ def preprocess_and_vectorize(X):
         #print(lemmatized)
         #print("lem**ed*****")
         lemmatized_texts.append(lemmatized)
+    print("without lemma :"processed_texts[1520])
+    print("with lemma :"lemmatized_texts[1520])
     # Vectorization using TF-IDF
     vectorizer = TfidfVectorizer(tokenizer=lambda x: x, lowercase=False)
     vectorized_data = vectorizer.fit_transform(processed_texts)
