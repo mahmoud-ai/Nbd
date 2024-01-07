@@ -1,27 +1,27 @@
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Embedding
+#from tensorflow.keras.models import Sequential
+#from tensorflow.keras.layers import LSTM, Dense, Embedding
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 import nltk
 nltk.download('stopwords')
 from keras.layers import Embedding, Conv1D, MaxPooling1D, LSTM, Dense, Dropout
 from nltk.corpus import stopwords
-import nltk
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 from pyarabic.araby import strip_tashkeel, strip_tatweel, normalize_ligature, normalize_hamza, normalize_alef, normalize_teh
 #from pyarabic.araby import ArabicStopWords
 from pyarabic.araby import is_arabicrange
-from nltk.corpus import stopwords
+
 from sklearn.model_selection import train_test_split
 import numpy as np
 from keras.models import Sequential
-from keras.layers import Embedding, Conv1D, MaxPooling1D, LSTM, Dense
+#from keras.layers import Embedding, Conv1D, MaxPooling1D, LSTM, Dense
 import pandas as pd
-from pyarabic.araby import strip_tashkeel, strip_tatweel, normalize_ligature, normalize_hamza, normalize_alef, normalize_teh
+
 import tensorflow as tf
-import nltk
+
 from nltk.tokenize import word_tokenize
-from nltk.stem import ISRIStemmer
+#from nltk.stem import ISRIStemmer
 from farasa.stemmer import FarasaStemmer
 
 def stem_arabic_words(word_list):
